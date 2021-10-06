@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/font/muli.xml" value="0.2546875" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/activity_detail.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/app_bar_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/fragment_favorite.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/fragment_movies.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/fragment_tvshow.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/layout/item_list_movie.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/MovieApp/app/src/main/res/menu/main.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/drawable/ic_favorite.xml" value="0.240625" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/drawable/ic_favorite_border.xml" value="0.240625" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/drawable/ic_menu_favorite.xml" value="0.240625" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/layout/activity_detail.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/layout/fragment_favorite.xml" value="0.22447916666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
