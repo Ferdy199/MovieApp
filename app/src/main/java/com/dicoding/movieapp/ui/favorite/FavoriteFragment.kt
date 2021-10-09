@@ -1,23 +1,16 @@
          package com.dicoding.movieapp.ui.favorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.movieapp.core.adapter.MovieAdapter
-import com.dicoding.movieapp.core.local.entity.MovieEntity
-import com.dicoding.movieapp.core.local.entity.TvShowEntity
-import com.dicoding.movieapp.core.utils.ViewModelFactory
+import com.dicoding.movieapp.core.adapter.SectionsPagerAdapter
 import com.dicoding.movieapp.databinding.FragmentFavoriteBinding
-import com.dicoding.movieapp.ui.detail.DetailViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 
          class FavoriteFragment : Fragment() {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentFavoriteBinding? = null
 
     // This property is only valid between onCreateView and
@@ -31,35 +24,21 @@ import com.dicoding.movieapp.ui.detail.DetailViewModel
     ): View? {
 
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (activity != null){
-            val movieAdapter = MovieAdapter<MovieEntity>()
-            val tvShowAdapter = MovieAdapter<TvShowEntity>()
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
-            favoriteViewModel.getMovieFavorite().observe(viewLifecycleOwner, {
-                if (it != null){
-                    movieAdapter.setData(it)
-                    Log.d("Isi Favorite", it.toString())
+        val sectionsPagerAdapter = SectionsPagerAdapter(parentFragmentManager, lifecycle)
+        with(binding){
+            favViewpager.adapter = sectionsPagerAdapter
+            TabLayoutMediator(favTablayout, favViewpager){ tab, position ->
+                when(position){
+                    0 -> tab.text = "Movies"
+                    1 -> tab.text = "Tv Show"
                 }
-            })
-
-            favoriteViewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
-                if (it != null){
-                    tvShowAdapter.setData(it)
-                }
-            })
-
-            with(binding.rvFavorite){
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = movieAdapter
-            }
+            }.attach()
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 

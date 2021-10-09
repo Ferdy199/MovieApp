@@ -8,6 +8,5 @@ import com.dicoding.movieapp.core.local.entity.TvShowEntity
 import com.dicoding.movieapp.core.source.MovieRepository
 
 class FavoriteViewModel(private val movieRepository: MovieRepository) : ViewModel() {
-    fun getMovieFavorite() : LiveData<List<MovieEntity>> = movieRepository.getMovieFavorite()
-    fun getTvShowFavorite() : LiveData<List<TvShowEntity>> = movieRepository.getTvShowFavorite()
+
 }

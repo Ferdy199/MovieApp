@@ -7,6 +7,8 @@ import com.dicoding.movieapp.core.di.Injection
 import com.dicoding.movieapp.core.source.MovieRepository
 import com.dicoding.movieapp.ui.detail.DetailViewModel
 import com.dicoding.movieapp.ui.favorite.FavoriteViewModel
+import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteViewModel
+import com.dicoding.movieapp.ui.favorite.tvfav.TvFavoriteViewModel
 import com.dicoding.movieapp.ui.movies.MoviesViewModel
 import com.dicoding.movieapp.ui.tvShow.TvShowViewModel
 
@@ -23,8 +25,11 @@ class ViewModelFactory private constructor(private val mMovieRepository: MovieRe
             modelClass.isAssignableFrom(DetailViewModel::class.java) ->{
                 DetailViewModel(mMovieRepository) as T
             }
-            modelClass.isAssignableFrom(FavoriteViewModel::class.java) ->{
-                FavoriteViewModel(mMovieRepository) as T
+            modelClass.isAssignableFrom(MovieFavoriteViewModel::class.java) -> {
+                MovieFavoriteViewModel(mMovieRepository) as T
+            }
+            modelClass.isAssignableFrom(TvFavoriteViewModel::class.java) -> {
+                TvFavoriteViewModel(mMovieRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }
