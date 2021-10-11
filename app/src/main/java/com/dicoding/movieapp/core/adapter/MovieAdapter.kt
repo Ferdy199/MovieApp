@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.movieapp.R
+import com.dicoding.movieapp.core.domain.model.Movie
+import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.local.entity.MovieEntity
 import com.dicoding.movieapp.core.local.entity.TvShowEntity
 import com.dicoding.movieapp.databinding.ItemListMovieBinding
@@ -41,7 +43,7 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
         private val binding = ItemListMovieBinding.bind(itemView)
         fun bind(data: RequestType){
             when(data){
-                is MovieEntity -> {
+                is Movie -> {
                     with(binding){
                         tvItemTitle.text = data.original_title
                         tvItemSubtitle.text = data.release_date
@@ -58,7 +60,7 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
                         }
                     }
                 }
-                is TvShowEntity -> {
+                is TvShow -> {
                     with(binding){
                         tvItemTitle.text = data.original_name
                         tvItemSubtitle.text = data.first_air_date

@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dicoding.movieapp.R
-import com.dicoding.movieapp.core.local.entity.MovieEntity
-import com.dicoding.movieapp.core.local.entity.TvShowEntity
+import com.dicoding.movieapp.core.domain.model.Movie
+import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.ActivityDetailBinding
@@ -50,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    private fun setDetailMovie(movieDetail : Resource<MovieEntity>){
+    private fun setDetailMovie(movieDetail : Resource<Movie>){
         var statusFavorite = movieDetail.data?.favorite
         with(binding){
             detailPosterTxt.text = movieDetail.data?.original_title
@@ -82,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setDetailTvSHow(tvShowDetail : Resource<TvShowEntity>){
+    private fun setDetailTvSHow(tvShowDetail : Resource<TvShow>){
         var statusFavorite = tvShowDetail.data?.favorite
         with(binding){
             detailPosterTxt.text = tvShowDetail.data?.original_name
@@ -149,13 +148,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setFavorite(favorite : Boolean?){
-        when(favorite){
-            true -> {
-                binding.detailFavoriteButton.setImageResource(R.drawable.ic_menu_favorite)
-            }
-            false -> {
-                binding.detailFavoriteButton.setImageResource(R.drawable.ic_favorite_border)
-            }
+        if(favorite == true){
+            binding.detailFavoriteButton.setImageResource(R.drawable.ic_menu_favorite)
+        }else{
+            binding.detailFavoriteButton.setImageResource(R.drawable.ic_favorite_border)
         }
     }
 

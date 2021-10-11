@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.movieapp.core.adapter.MovieAdapter
+import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.local.entity.TvShowEntity
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
@@ -36,11 +37,11 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showLoading(true)
         if (activity != null){
-            val tvShowAdapter = MovieAdapter<TvShowEntity>()
+            val tvShowAdapter = MovieAdapter<TvShow>()
             val factory = ViewModelFactory.getInstance(requireActivity())
             tvShowViewModel = ViewModelProvider(this, factory).get(TvShowViewModel::class.java)
 
-            tvShowViewModel.getAllTvShow().observe(viewLifecycleOwner, {
+            tvShowViewModel.getAllTvShow.observe(viewLifecycleOwner, {
                 if (it != null){
                     when(it){
                         is Resource.Success -> {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.movieapp.core.adapter.MovieAdapter
+import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.local.entity.MovieEntity
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
@@ -36,11 +37,11 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showLoading(true)
         if (activity != null){
-            val movieAdapter = MovieAdapter<MovieEntity>()
+            val movieAdapter = MovieAdapter<Movie>()
             val factory = ViewModelFactory.getInstance(requireActivity())
             moviesViewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
 
-            moviesViewModel.getAllMovies().observe(viewLifecycleOwner, {
+            moviesViewModel.getAllMovies.observe(viewLifecycleOwner, {
                 if(it != null){
                     when(it){
                         is Resource.Loading -> showLoading(true)

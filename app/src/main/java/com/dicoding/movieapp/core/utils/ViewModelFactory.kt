@@ -4,32 +4,31 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.movieapp.core.di.Injection
-import com.dicoding.movieapp.core.source.MovieRepository
+import com.dicoding.movieapp.core.domain.usecase.MovieUseCase
 import com.dicoding.movieapp.ui.detail.DetailViewModel
-import com.dicoding.movieapp.ui.favorite.FavoriteViewModel
 import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteViewModel
 import com.dicoding.movieapp.ui.favorite.tvfav.TvFavoriteViewModel
 import com.dicoding.movieapp.ui.movies.MoviesViewModel
 import com.dicoding.movieapp.ui.tvShow.TvShowViewModel
 
-class ViewModelFactory private constructor(private val mMovieRepository: MovieRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(private val movieUseCase: MovieUseCase) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when{
             modelClass.isAssignableFrom(MoviesViewModel::class.java) -> {
-                MoviesViewModel(mMovieRepository) as T
+                MoviesViewModel(movieUseCase) as T
             }
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
-                TvShowViewModel(mMovieRepository) as T
+                TvShowViewModel(movieUseCase) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) ->{
-                DetailViewModel(mMovieRepository) as T
+                DetailViewModel(movieUseCase) as T
             }
             modelClass.isAssignableFrom(MovieFavoriteViewModel::class.java) -> {
-                MovieFavoriteViewModel(mMovieRepository) as T
+                MovieFavoriteViewModel(movieUseCase) as T
             }
             modelClass.isAssignableFrom(TvFavoriteViewModel::class.java) -> {
-                TvFavoriteViewModel(mMovieRepository) as T
+                TvFavoriteViewModel(movieUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }
@@ -42,7 +41,7 @@ class ViewModelFactory private constructor(private val mMovieRepository: MovieRe
 
         fun getInstance(context: Context) : ViewModelFactory =
             instance ?: synchronized(this){
-                instance ?: ViewModelFactory(Injection.provideRepository(context)).apply {
+                instance ?: ViewModelFactory(Injection.provideMovieUseCase(context)).apply {
                     instance = this
                 }
             }
