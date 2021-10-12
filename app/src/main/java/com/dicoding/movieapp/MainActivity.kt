@@ -1,24 +1,17 @@
 package com.dicoding.movieapp
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.ui.AppBarConfiguration
 import com.dicoding.movieapp.databinding.ActivityMainBinding
 import com.dicoding.movieapp.ui.favorite.FavoriteFragment
 import com.dicoding.movieapp.ui.movies.MoviesFragment
 import com.dicoding.movieapp.ui.tvShow.TvShowFragment
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

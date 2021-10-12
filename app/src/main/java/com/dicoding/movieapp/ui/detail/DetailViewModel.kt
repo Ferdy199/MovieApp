@@ -1,9 +1,6 @@
 package com.dicoding.movieapp.ui.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.domain.usecase.MovieUseCase
@@ -17,10 +14,10 @@ class DetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
     }
 
     fun getDetailMovie() : LiveData<Resource<Movie>> = Transformations.switchMap(movieId){
-        movieUseCase.getDetailMovie(it)
+        movieUseCase.getDetailMovie(it).asLiveData()
     }
     fun getDetailTvShow() : LiveData<Resource<TvShow>> = Transformations.switchMap(movieId){
-        movieUseCase.getDetailTvShow(it)
+        movieUseCase.getDetailTvShow(it).asLiveData()
     }
 
     fun setMovieFavorite(movie : Movie, newState : Boolean){

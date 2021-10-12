@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.Movie
-import com.dicoding.movieapp.core.local.entity.MovieEntity
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.FragmentMoviesBinding

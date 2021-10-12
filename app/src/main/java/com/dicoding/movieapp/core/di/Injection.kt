@@ -1,13 +1,13 @@
 package com.dicoding.movieapp.core.di
 
 import android.content.Context
+import com.dicoding.movieapp.core.domain.repository.MovieDataSource
+import com.dicoding.movieapp.core.domain.repository.MovieRepository
 import com.dicoding.movieapp.core.domain.usecase.MovieInteractor
 import com.dicoding.movieapp.core.domain.usecase.MovieUseCase
 import com.dicoding.movieapp.core.local.room.MovieDatabase
 import com.dicoding.movieapp.core.network.config.ApiConfig
 import com.dicoding.movieapp.core.source.LocalDataSource
-import com.dicoding.movieapp.core.domain.repository.MovieDataSource
-import com.dicoding.movieapp.core.domain.repository.MovieRepository
 import com.dicoding.movieapp.core.source.RemoteDataSource
 import com.dicoding.movieapp.core.utils.AppExecutors
 

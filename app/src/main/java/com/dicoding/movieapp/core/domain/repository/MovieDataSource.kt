@@ -1,22 +1,22 @@
 package com.dicoding.movieapp.core.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface MovieDataSource {
-    fun getAllMovies() : LiveData<Resource<List<Movie>>>
+    fun getAllMovies() : Flow<Resource<List<Movie>>>
 
-    fun getAllTvShow() : LiveData<Resource<List<TvShow>>>
+    fun getAllTvShow() : Flow<Resource<List<TvShow>>>
 
-    fun getDetailMovie(movie_id : Int): LiveData<Resource<Movie>>
+    fun getDetailMovie(movie_id : Int): Flow<Resource<Movie>>
 
-    fun getDetailTvShow(tvShow_id : Int) : LiveData<Resource<TvShow>>
+    fun getDetailTvShow(tvShow_id : Int) : Flow<Resource<TvShow>>
 
-    fun getMovieFavorite(): LiveData<List<Movie>>
+    fun getMovieFavorite(): Flow<List<Movie>>
 
-    fun getTvShowFavorite(): LiveData<List<TvShow>>
+    fun getTvShowFavorite(): Flow<List<TvShow>>
 
     fun setMovieFavorite(movie : Movie, state: Boolean)
 

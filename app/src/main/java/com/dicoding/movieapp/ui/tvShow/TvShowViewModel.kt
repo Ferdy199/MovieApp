@@ -1,8 +1,9 @@
 package com.dicoding.movieapp.ui.tvShow
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.dicoding.movieapp.core.domain.usecase.MovieUseCase
 
 class TvShowViewModel(movieUseCase: MovieUseCase) : ViewModel() {
-    val getAllTvShow = movieUseCase.getAllTvShow()
+    val getAllTvShow = movieUseCase.getAllTvShow().asLiveData()
 }

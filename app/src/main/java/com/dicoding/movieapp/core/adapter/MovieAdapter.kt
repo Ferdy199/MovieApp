@@ -9,8 +9,6 @@ import com.bumptech.glide.Glide
 import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
-import com.dicoding.movieapp.core.local.entity.MovieEntity
-import com.dicoding.movieapp.core.local.entity.TvShowEntity
 import com.dicoding.movieapp.databinding.ItemListMovieBinding
 import com.dicoding.movieapp.ui.detail.DetailActivity
 

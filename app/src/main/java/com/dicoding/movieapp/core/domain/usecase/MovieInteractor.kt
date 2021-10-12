@@ -1,33 +1,33 @@
 package com.dicoding.movieapp.core.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.domain.repository.MovieDataSource
 import com.dicoding.movieapp.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 class MovieInteractor(private val movieRepository: MovieDataSource) : MovieUseCase {
-    override fun getAllMovies(): LiveData<Resource<List<Movie>>> {
+    override fun getAllMovies(): Flow<Resource<List<Movie>>> {
         return movieRepository.getAllMovies()
     }
 
-    override fun getAllTvShow(): LiveData<Resource<List<TvShow>>> {
+    override fun getAllTvShow(): Flow<Resource<List<TvShow>>> {
         return movieRepository.getAllTvShow()
     }
 
-    override fun getDetailMovie(movie_id: Int): LiveData<Resource<Movie>> {
+    override fun getDetailMovie(movie_id: Int): Flow<Resource<Movie>> {
         return movieRepository.getDetailMovie(movie_id)
     }
 
-    override fun getDetailTvShow(tvShow_id: Int): LiveData<Resource<TvShow>> {
+    override fun getDetailTvShow(tvShow_id: Int): Flow<Resource<TvShow>> {
         return movieRepository.getDetailTvShow(tvShow_id)
     }
 
-    override fun getMovieFavorite(): LiveData<List<Movie>> {
+    override fun getMovieFavorite(): Flow<List<Movie>> {
         return movieRepository.getMovieFavorite()
     }
 
-    override fun getTvShowFavorite(): LiveData<List<TvShow>> {
+    override fun getTvShowFavorite(): Flow<List<TvShow>> {
         return movieRepository.getTvShowFavorite()
     }
 
