@@ -1,20 +1,29 @@
 package com.dicoding.movieapp.ui.favorite.tvfav
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.movieapp.MyApplication
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.TvFavoriteFragmentBinding
+import javax.inject.Inject
 
 class TvFavorite : Fragment() {
 
-    private lateinit var viewModel: TvFavoriteViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val viewModel: TvFavoriteViewModel by viewModels {
+        factory
+    }
+
     private var _binding: TvFavoriteFragmentBinding? = null
 
     private val binding get() = _binding!!
@@ -27,19 +36,21 @@ class TvFavorite : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (activity != null){
-            val movieAdapter = MovieAdapter<TvShow>()
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            viewModel = ViewModelProvider(this, factory)[TvFavoriteViewModel::class.java]
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (activity != null) {
+            val movieAdapter = MovieAdapter<TvShow>()
             viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
-                if (it !== null){
+                if (it !== null) {
                     movieAdapter.setData(it)
                 }
             })
 
-            with(binding.rvTvshowFav){
+            with(binding.rvTvshowFav) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = movieAdapter

@@ -13,8 +13,11 @@ import com.dicoding.movieapp.core.utils.DataMapper
 import com.dicoding.movieapp.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MovieRepository private constructor(
+@Singleton
+class MovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
@@ -66,10 +69,10 @@ class MovieRepository private constructor(
         }.asFlow()
     }
 
-    override fun getDetailMovie(movie_id : Int): Flow<Resource<Movie>> {
-        return object : NetworkBoundResource<Movie, DataMovieResponse>(){
+    override fun getDetailMovie(movie_id: Int): Flow<Resource<Movie>> {
+        return object : NetworkBoundResource<Movie, DataMovieResponse>() {
             override fun loadFromDB(): Flow<Movie> {
-                return localDataSource.getDetailMovie(movie_id).map{
+                return localDataSource.getDetailMovie(movie_id).map {
                     DataMapper.mapDetailMovieEntitiesToDomain(it)
                 }
             }
@@ -90,11 +93,11 @@ class MovieRepository private constructor(
     }
 
     override fun getDetailTvShow(tvShow_id: Int): Flow<Resource<TvShow>> {
-        return object : NetworkBoundResource<TvShow, DataTvShowResponse>(){
+        return object : NetworkBoundResource<TvShow, DataTvShowResponse>() {
             override fun loadFromDB(): Flow<TvShow> {
-               return localDataSource.getDetailTvShow(tvShow_id).map{
-                   DataMapper.mapDetailTvShowEntitiesToDomain(it)
-               }
+                return localDataSource.getDetailTvShow(tvShow_id).map {
+                    DataMapper.mapDetailTvShowEntitiesToDomain(it)
+                }
             }
 
             override fun shouldFetch(data: TvShow?): Boolean {
@@ -113,13 +116,13 @@ class MovieRepository private constructor(
     }
 
     override fun getMovieFavorite(): Flow<List<Movie>> {
-        return localDataSource.getMovieFavorite().map{
+        return localDataSource.getMovieFavorite().map {
             DataMapper.mapMovieEntitiesToDomain(it)
         }
     }
 
     override fun getTvShowFavorite(): Flow<List<TvShow>> {
-        return localDataSource.getTvShowFavorite().map{
+        return localDataSource.getTvShowFavorite().map {
             DataMapper.mapTvShowEntitiesToDomain(it)
         }
     }
@@ -133,21 +136,9 @@ class MovieRepository private constructor(
 
     override fun setTvShowFavorite(tvShow: TvShow, state: Boolean) {
         val tvShowEntity = DataMapper.mapTvShowDomainToEntity(tvShow)
-        appExecutors.diskIO().execute{
+        appExecutors.diskIO().execute {
             localDataSource.setFavoriteTvShow(tvShowEntity, state)
         }
 
-    }
-
-    companion object{
-        @Volatile
-        private var instance: MovieRepository? = null
-
-        fun getInstance(remoteData: RemoteDataSource, localData : LocalDataSource, appExecutors: AppExecutors) : MovieRepository =
-            instance ?: synchronized(this){
-                instance ?: MovieRepository(remoteData, localData, appExecutors).apply {
-                    instance = this
-                }
-            }
     }
 }

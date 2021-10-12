@@ -5,8 +5,10 @@ import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.domain.repository.MovieDataSource
 import com.dicoding.movieapp.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MovieInteractor(private val movieRepository: MovieDataSource) : MovieUseCase {
+class MovieInteractor @Inject constructor(private val movieRepository: MovieDataSource) :
+    MovieUseCase {
     override fun getAllMovies(): Flow<Resource<List<Movie>>> {
         return movieRepository.getAllMovies()
     }

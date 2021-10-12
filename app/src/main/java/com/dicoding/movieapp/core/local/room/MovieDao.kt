@@ -8,34 +8,34 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
     @Query("SELECT * FROM movie")
-    fun getAllMovies() : Flow<List<MovieEntity>>
+    fun getAllMovies(): Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM movie WHERE movie_favorite = 1 ")
-    fun getMovieFavorite() : Flow<List<MovieEntity>>
+    fun getMovieFavorite(): Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM tvShow")
-    fun getAllTvShow() : Flow<List<TvShowEntity>>
+    fun getAllTvShow(): Flow<List<TvShowEntity>>
 
     @Query("SELECT * FROM tvShow WHERE tvShow_favorite = 1")
-    fun getTvShowFavorite() : Flow<List<TvShowEntity>>
+    fun getTvShowFavorite(): Flow<List<TvShowEntity>>
 
     @Transaction
     @Query("SELECT * FROM movie WHERE id = :id")
-    fun getDetailMovie(id : Int) : Flow<MovieEntity>
+    fun getDetailMovie(id: Int): Flow<MovieEntity>
 
     @Transaction
     @Query("SELECT *FROM tvShow WHERE id = :id")
-    fun getDetailTvShow(id: Int) : Flow<TvShowEntity>
+    fun getDetailTvShow(id: Int): Flow<TvShowEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(movies : List<MovieEntity>)
+    suspend fun insertMovies(movies: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTvShow(tvShow : List<TvShowEntity>)
+    suspend fun insertTvShow(tvShow: List<TvShowEntity>)
 
     @Update
-    fun updateMovies(movies : MovieEntity)
+    fun updateMovies(movies: MovieEntity)
 
     @Update
-    fun updateTvShow(tvShow : TvShowEntity)
+    fun updateTvShow(tvShow: TvShowEntity)
 }

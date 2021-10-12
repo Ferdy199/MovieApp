@@ -7,10 +7,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteFragment
 import com.dicoding.movieapp.ui.favorite.tvfav.TvFavorite
 
-class SectionsPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
+class SectionsPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fm, lifecycle) {
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> MovieFavoriteFragment()
             1 -> TvFavorite()
             else -> Fragment()

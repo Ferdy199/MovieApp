@@ -3,30 +3,36 @@ package com.dicoding.movieapp.ui.detail
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.dicoding.movieapp.MyApplication
 import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.ActivityDetailBinding
+import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var  binding : ActivityDetailBinding
-    private lateinit var detailViewModel: DetailViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private lateinit var binding: ActivityDetailBinding
+
+    private val detailViewModel: DetailViewModel by viewModels {
+        factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         showLoading(true)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         //get Id
         val movieId = intent.getIntExtra(EXTRA_ID.toString(), 0)
@@ -38,20 +44,20 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel.setMovieId(movieId)
 
         //set halaman detail sesuai type
-        when(detailType){
+        when (detailType) {
             "Movie" -> {
                 setDetailMovieData()
             }
-            "Tv_Show" ->{
+            "Tv_Show" -> {
                 setDetailTvShowData()
             }
         }
 
     }
 
-    private fun setDetailMovie(movieDetail : Resource<Movie>){
+    private fun setDetailMovie(movieDetail: Resource<Movie>) {
         var statusFavorite = movieDetail.data?.favorite
-        with(binding){
+        with(binding) {
             detailPosterTxt.text = movieDetail.data?.original_title
             detailMoviesName.text = movieDetail.data?.original_title
             detailReleasedYear.text = movieDetail.data?.release_date
@@ -63,9 +69,17 @@ class DetailActivity : AppCompatActivity() {
                 statusFavorite = !statusFavorite!!
                 detailViewModel.setMovieFavorite(movieDetail.data!!, statusFavorite!!)
                 setFavorite(statusFavorite)
-                when(statusFavorite){
-                    true -> Toast.makeText(this@DetailActivity, "${movieDetail.data.original_title} Berhasil Disimpan Didalam Favorite", Toast.LENGTH_SHORT).show()
-                    false ->Toast.makeText(this@DetailActivity, "${movieDetail.data.original_title} Berhasil Dihapus ", Toast.LENGTH_SHORT).show()
+                when (statusFavorite) {
+                    true -> Toast.makeText(
+                        this@DetailActivity,
+                        "${movieDetail.data.original_title} Berhasil Disimpan Didalam Favorite",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    false -> Toast.makeText(
+                        this@DetailActivity,
+                        "${movieDetail.data.original_title} Berhasil Dihapus ",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -81,9 +95,9 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setDetailTvSHow(tvShowDetail : Resource<TvShow>){
+    private fun setDetailTvSHow(tvShowDetail: Resource<TvShow>) {
         var statusFavorite = tvShowDetail.data?.favorite
-        with(binding){
+        with(binding) {
             detailPosterTxt.text = tvShowDetail.data?.original_name
             detailMoviesName.text = tvShowDetail.data?.original_name
             detailReleasedYear.text = tvShowDetail.data?.first_air_date
@@ -95,9 +109,17 @@ class DetailActivity : AppCompatActivity() {
                 statusFavorite = !statusFavorite!!
                 detailViewModel.setTvShowFavorite(tvShowDetail.data!!, statusFavorite!!)
                 setFavorite(statusFavorite)
-                when(statusFavorite){
-                    true -> Toast.makeText(this@DetailActivity, "${tvShowDetail.data.original_name} Berhasil Disimpan Didalam Favorite", Toast.LENGTH_SHORT).show()
-                    false ->Toast.makeText(this@DetailActivity, "${tvShowDetail.data.original_name} Berhasil Dihapus ", Toast.LENGTH_SHORT).show()
+                when (statusFavorite) {
+                    true -> Toast.makeText(
+                        this@DetailActivity,
+                        "${tvShowDetail.data.original_name} Berhasil Disimpan Didalam Favorite",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    false -> Toast.makeText(
+                        this@DetailActivity,
+                        "${tvShowDetail.data.original_name} Berhasil Dihapus ",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -114,30 +136,30 @@ class DetailActivity : AppCompatActivity() {
     }
 
 
-    private fun setDetailMovieData(){
+    private fun setDetailMovieData() {
         detailViewModel.getDetailMovie().observe(this, {
-            if (it != null){
+            if (it != null) {
                 setDetailMovie(it)
                 showLoading(false)
-            }else{
+            } else {
                 Toast.makeText(this, "DATA KOSONG", Toast.LENGTH_LONG).show()
             }
         })
     }
 
-    private fun setDetailTvShowData(){
+    private fun setDetailTvShowData() {
         detailViewModel.getDetailTvShow().observe(this, {
-            if (it != null){
+            if (it != null) {
                 setDetailTvSHow(it)
                 showLoading(false)
-            }else{
+            } else {
                 Toast.makeText(this, "DATA KOSONG", Toast.LENGTH_LONG).show()
             }
         })
     }
 
-    private fun showLoading(loading : Boolean){
-        when(loading){
+    private fun showLoading(loading: Boolean) {
+        when (loading) {
             true -> {
                 binding.loadingBar.visibility = View.VISIBLE
             }
@@ -147,15 +169,15 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFavorite(favorite : Boolean?){
-        if(favorite == true){
+    private fun setFavorite(favorite: Boolean?) {
+        if (favorite == true) {
             binding.detailFavoriteButton.setImageResource(R.drawable.ic_menu_favorite)
-        }else{
+        } else {
             binding.detailFavoriteButton.setImageResource(R.drawable.ic_favorite_border)
         }
     }
 
-    companion object{
+    companion object {
         const val EXTRA_ID = 0
         const val DETAIL_TYPE = "type"
     }

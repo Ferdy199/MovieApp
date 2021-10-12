@@ -1,4 +1,4 @@
-         package com.dicoding.movieapp.ui.favorite
+package com.dicoding.movieapp.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.dicoding.movieapp.core.adapter.SectionsPagerAdapter
 import com.dicoding.movieapp.databinding.FragmentFavoriteBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-         class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
 
@@ -29,10 +29,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val sectionsPagerAdapter = SectionsPagerAdapter(parentFragmentManager, lifecycle)
-        with(binding){
+        with(binding) {
             favViewpager.adapter = sectionsPagerAdapter
-            TabLayoutMediator(favTablayout, favViewpager){ tab, position ->
-                when(position){
+            TabLayoutMediator(favTablayout, favViewpager) { tab, position ->
+                when (position) {
                     0 -> tab.text = "Movies"
                     1 -> tab.text = "Tv Show"
                 }

@@ -13,23 +13,23 @@ interface ApiService {
 
     @GET("3/trending/movie/week")
     suspend fun getMovie(
-        @Query("api_key")query : String = BuildConfig.TMDB_TOKEN
+        @Query("api_key") query: String = BuildConfig.TMDB_TOKEN
     ): ResponseMovie
 
     @GET("3/trending/tv/week")
     suspend fun getTvShow(
-        @Query("api_key")query : String = BuildConfig.TMDB_TOKEN
+        @Query("api_key") query: String = BuildConfig.TMDB_TOKEN
     ): ResponseTvShow
 
     @GET("/3/movie/{movie_id}")
     suspend fun getMovieDetail(
-        @Path("movie_id") movie_id : Int,
-        @Query("api_key")query : String = BuildConfig.TMDB_TOKEN
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") query: String = BuildConfig.TMDB_TOKEN
     ): DataMovieResponse
 
     @GET("/3/tv/{tv_id}")
     suspend fun getTvShowDetail(
-        @Path("tv_id") tvShow_id : Int,
-        @Query("api_key")query : String = BuildConfig.TMDB_TOKEN
+        @Path("tv_id") tvShow_id: Int,
+        @Query("api_key") query: String = BuildConfig.TMDB_TOKEN
     ): DataTvShowResponse
 }

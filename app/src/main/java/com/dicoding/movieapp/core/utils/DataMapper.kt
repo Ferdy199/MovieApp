@@ -8,7 +8,7 @@ import com.dicoding.movieapp.core.network.response.DataMovieResponse
 import com.dicoding.movieapp.core.network.response.DataTvShowResponse
 
 object DataMapper {
-    fun mapMovieResponsesToEntities(input : List<DataMovieResponse>) : List<MovieEntity>{
+    fun mapMovieResponsesToEntities(input: List<DataMovieResponse>): List<MovieEntity> {
         val movieList = ArrayList<MovieEntity>()
         input.map {
             val movie = MovieEntity(
@@ -26,7 +26,7 @@ object DataMapper {
         return movieList
     }
 
-    fun mapTvShowResponsesToEntities(input : List<DataTvShowResponse>) : List<TvShowEntity>{
+    fun mapTvShowResponsesToEntities(input: List<DataTvShowResponse>): List<TvShowEntity> {
         val tvShowList = ArrayList<TvShowEntity>()
         input.map {
             val tvShow = TvShowEntity(
@@ -44,13 +44,13 @@ object DataMapper {
         return tvShowList
     }
 
-    fun mapDetailMovieResponsesToEntities(input : DataMovieResponse) : List<MovieEntity>{
+    fun mapDetailMovieResponsesToEntities(input: DataMovieResponse): List<MovieEntity> {
         val detailMovieList = ArrayList<MovieEntity>()
         val dataMovie = MovieEntity(
             id = input.id,
             overview = input.overview,
             release_date = input.release_date,
-            backdrop_path =input.backdrop_path,
+            backdrop_path = input.backdrop_path,
             original_title = input.original_title,
             poster_path = input.poster_path,
             vote_average = input.vote_average,
@@ -60,13 +60,13 @@ object DataMapper {
         return detailMovieList
     }
 
-    fun mapDetailTvShowReponsesToEntities(input : DataTvShowResponse) : List<TvShowEntity>{
+    fun mapDetailTvShowReponsesToEntities(input: DataTvShowResponse): List<TvShowEntity> {
         val detailTvShowList = ArrayList<TvShowEntity>()
         val dataTvShow = TvShowEntity(
             id = input.id,
             overview = input.overview,
             first_air_date = input.first_air_date,
-            backdrop_path =input.backdrop_path,
+            backdrop_path = input.backdrop_path,
             original_name = input.original_name,
             poster_path = input.poster_path,
             vote_average = input.vote_average,
@@ -76,7 +76,7 @@ object DataMapper {
         return detailTvShowList
     }
 
-    fun mapMovieEntitiesToDomain(input : List<MovieEntity>) : List<Movie>{
+    fun mapMovieEntitiesToDomain(input: List<MovieEntity>): List<Movie> {
         return input.map {
             Movie(
                 id = it.id,
@@ -91,7 +91,7 @@ object DataMapper {
         }
     }
 
-    fun mapTvShowEntitiesToDomain(input : List<TvShowEntity>) : List<TvShow>{
+    fun mapTvShowEntitiesToDomain(input: List<TvShowEntity>): List<TvShow> {
         return input.map {
             TvShow(
                 id = it.id,
@@ -110,18 +110,18 @@ object DataMapper {
         id = input.id,
         overview = input.overview,
         release_date = input.release_date,
-        backdrop_path =input.backdrop_path,
+        backdrop_path = input.backdrop_path,
         original_title = input.original_title,
         poster_path = input.poster_path,
         vote_average = input.vote_average,
         favorite = input.favorite
     )
 
-    fun mapTvShowDomainToEntity(input : TvShow) = TvShowEntity(
+    fun mapTvShowDomainToEntity(input: TvShow) = TvShowEntity(
         id = input.id,
         overview = input.overview,
         first_air_date = input.first_air_date,
-        backdrop_path =input.backdrop_path,
+        backdrop_path = input.backdrop_path,
         original_name = input.original_name,
         poster_path = input.poster_path,
         vote_average = input.vote_average,

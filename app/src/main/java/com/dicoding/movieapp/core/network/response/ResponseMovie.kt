@@ -9,4 +9,4 @@ data class ResponseMovie(
     @field:SerializedName("results")
     val results: List<DataMovieResponse>? = null,
 
-)
+    )

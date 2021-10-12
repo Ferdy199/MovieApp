@@ -1,22 +1,31 @@
 package com.dicoding.movieapp.ui.tvShow
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.movieapp.MyApplication
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.FragmentTvshowBinding
+import javax.inject.Inject
 
 class TvShowFragment : Fragment() {
 
-    private lateinit var tvShowViewModel: TvShowViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val tvShowViewModel: TvShowViewModel by viewModels {
+        factory
+    }
+
     private var _binding: FragmentTvshowBinding? = null
 
     // This property is only valid between onCreateView and
@@ -32,17 +41,19 @@ class TvShowFragment : Fragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoading(true)
-        if (activity != null){
+        if (activity != null) {
             val tvShowAdapter = MovieAdapter<TvShow>()
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            tvShowViewModel = ViewModelProvider(this, factory).get(TvShowViewModel::class.java)
-
             tvShowViewModel.getAllTvShow.observe(viewLifecycleOwner, {
-                if (it != null){
-                    when(it){
+                if (it != null) {
+                    when (it) {
                         is Resource.Success -> {
                             tvShowAdapter.setData(it.data)
                             showLoading(false)
@@ -59,7 +70,7 @@ class TvShowFragment : Fragment() {
                 Log.d("ISI DATA", it.toString())
             })
 
-            with(binding.rvTvshow){
+            with(binding.rvTvshow) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = tvShowAdapter
@@ -67,8 +78,8 @@ class TvShowFragment : Fragment() {
         }
     }
 
-    private fun showLoading(loading : Boolean){
-        when(loading){
+    private fun showLoading(loading: Boolean) {
+        when (loading) {
             true -> {
                 binding.loadingBar.visibility = View.VISIBLE
             }

@@ -16,15 +16,17 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
 
     private var listData = ArrayList<RequestType>()
 
-    fun setData(newListData : List<RequestType>?){
+    fun setData(newListData: List<RequestType>?) {
         if (newListData == null) return
-            listData.clear()
-            listData.addAll(newListData)
-            notifyDataSetChanged()
+        listData.clear()
+        listData.addAll(newListData)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-       return ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false))
+        return ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -37,12 +39,12 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
         return listData.size
     }
 
-    inner class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListMovieBinding.bind(itemView)
-        fun bind(data: RequestType){
-            when(data){
+        fun bind(data: RequestType) {
+            when (data) {
                 is Movie -> {
-                    with(binding){
+                    with(binding) {
                         tvItemTitle.text = data.original_title
                         tvItemSubtitle.text = data.release_date
                         Glide.with(itemView.context)
@@ -59,7 +61,7 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
                     }
                 }
                 is TvShow -> {
-                    with(binding){
+                    with(binding) {
                         tvItemTitle.text = data.original_name
                         tvItemSubtitle.text = data.first_air_date
                         Glide.with(itemView.context)
