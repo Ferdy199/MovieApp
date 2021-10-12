@@ -10,29 +10,18 @@ import com.dicoding.movieapp.ui.favorite.tvfav.TvFavoriteViewModel
 import com.dicoding.movieapp.ui.movies.MoviesViewModel
 import com.dicoding.movieapp.ui.tvShow.TvShowViewModel
 import javax.inject.Inject
+import javax.inject.Provider
 
 @AppScope
-class ViewModelFactory @Inject constructor(private val movieUseCase: MovieUseCase) :
-    ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory @Inject constructor(
+    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+    ) :
+    ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return when {
-            modelClass.isAssignableFrom(MoviesViewModel::class.java) -> {
-                MoviesViewModel(movieUseCase) as T
-            }
-            modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
-                TvShowViewModel(movieUseCase) as T
-            }
-            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(movieUseCase) as T
-            }
-            modelClass.isAssignableFrom(MovieFavoriteViewModel::class.java) -> {
-                MovieFavoriteViewModel(movieUseCase) as T
-            }
-            modelClass.isAssignableFrom(TvFavoriteViewModel::class.java) -> {
-                TvFavoriteViewModel(movieUseCase) as T
-            }
-            else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
-        }
+        val creator = creators[modelClass] ?: creators.entries.firstOrNull(){
+            modelClass.isAssignableFrom(it.key)
+        }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
+        return creator.get() as T
     }
 }

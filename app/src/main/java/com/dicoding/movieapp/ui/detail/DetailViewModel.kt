@@ -5,8 +5,9 @@ import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.domain.usecase.MovieUseCase
 import com.dicoding.movieapp.core.utils.Resource
+import javax.inject.Inject
 
-class DetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
+class DetailViewModel @Inject constructor(private val movieUseCase: MovieUseCase) : ViewModel() {
     var movieId = MutableLiveData<Int>()
 
     fun setMovieId(movie_id: Int) {
