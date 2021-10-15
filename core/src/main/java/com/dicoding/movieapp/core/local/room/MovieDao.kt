@@ -1,5 +1,6 @@
 package com.dicoding.movieapp.core.local.room
 
+import androidx.room.Dao
 import androidx.room.*
 import com.dicoding.movieapp.core.local.entity.MovieEntity
 import com.dicoding.movieapp.core.local.entity.TvShowEntity

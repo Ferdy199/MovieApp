@@ -1,6 +1,7 @@
 package com.dicoding.movieapp.ui.tvShow
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.FragmentTvshowBinding
+import com.dicoding.movieapp.ui.detail.DetailActivity
 import javax.inject.Inject
 
 class TvShowFragment : Fragment() {
@@ -51,6 +53,12 @@ class TvShowFragment : Fragment() {
         showLoading(true)
         if (activity != null) {
             val tvShowAdapter = MovieAdapter<TvShow>()
+            tvShowAdapter.onItemClick = {
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
+                intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
+                startActivity(intent)
+            }
             tvShowViewModel.getAllTvShow.observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it) {

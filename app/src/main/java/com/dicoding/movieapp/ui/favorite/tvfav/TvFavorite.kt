@@ -1,6 +1,7 @@
 package com.dicoding.movieapp.ui.favorite.tvfav
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.TvFavoriteFragmentBinding
+import com.dicoding.movieapp.ui.detail.DetailActivity
 import javax.inject.Inject
 
 class TvFavorite : Fragment() {
@@ -44,6 +46,12 @@ class TvFavorite : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
             val movieAdapter = MovieAdapter<TvShow>()
+            movieAdapter.onItemClick = {
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
+                intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
+                startActivity(intent)
+            }
             viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
                 if (it !== null) {
                     movieAdapter.setData(it)

@@ -72,12 +72,12 @@ class DetailActivity : AppCompatActivity() {
                 when (statusFavorite) {
                     true -> Toast.makeText(
                         this@DetailActivity,
-                        "${movieDetail.data.original_title} Berhasil Disimpan Didalam Favorite",
+                        "${movieDetail.data!!.original_title} Berhasil Disimpan Didalam Favorite",
                         Toast.LENGTH_SHORT
                     ).show()
                     false -> Toast.makeText(
                         this@DetailActivity,
-                        "${movieDetail.data.original_title} Berhasil Dihapus ",
+                        "${movieDetail.data!!.original_title} Berhasil Dihapus ",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -112,12 +112,12 @@ class DetailActivity : AppCompatActivity() {
                 when (statusFavorite) {
                     true -> Toast.makeText(
                         this@DetailActivity,
-                        "${tvShowDetail.data.original_name} Berhasil Disimpan Didalam Favorite",
+                        "${tvShowDetail.data!!.original_name} Berhasil Disimpan Didalam Favorite",
                         Toast.LENGTH_SHORT
                     ).show()
                     false -> Toast.makeText(
                         this@DetailActivity,
-                        "${tvShowDetail.data.original_name} Berhasil Dihapus ",
+                        "${tvShowDetail.data!!.original_name} Berhasil Dihapus ",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

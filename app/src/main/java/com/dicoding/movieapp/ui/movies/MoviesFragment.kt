@@ -1,6 +1,7 @@
 package com.dicoding.movieapp.ui.movies
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.utils.Resource
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.databinding.FragmentMoviesBinding
+import com.dicoding.movieapp.ui.detail.DetailActivity
 import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
@@ -50,7 +52,15 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showLoading(true)
         if (activity != null) {
+
             val movieAdapter = MovieAdapter<Movie>()
+            movieAdapter.onItemClick = {
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
+                intent.putExtra(DetailActivity.DETAIL_TYPE, "Movie")
+                context?.startActivity(intent)
+            }
+
             moviesViewModel.getAllMovies.observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it) {

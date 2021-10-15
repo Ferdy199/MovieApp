@@ -1,20 +1,19 @@
 package com.dicoding.movieapp.core.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dicoding.movieapp.R
+import com.dicoding.movieapp.core.R
+import com.dicoding.movieapp.core.databinding.ItemListMovieBinding
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.domain.model.TvShow
-import com.dicoding.movieapp.databinding.ItemListMovieBinding
-import com.dicoding.movieapp.ui.detail.DetailActivity
 
 class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>.ListViewHolder>() {
 
     private var listData = ArrayList<RequestType>()
+    var onItemClick : ((RequestType) -> Unit)? = null
 
     fun setData(newListData: List<RequestType>?) {
         if (newListData == null) return
@@ -23,13 +22,13 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter<RequestType>.ListViewHolder {
         return ListViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieAdapter<RequestType>.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
 
@@ -51,13 +50,6 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
                             .load(data.imageBaseUrl + data.backdrop_path)
                             .centerCrop()
                             .into(ivItemImage)
-
-                        itemView.setOnClickListener {
-                            val intent = Intent(itemView.context, DetailActivity::class.java)
-                            intent.putExtra(DetailActivity.EXTRA_ID.toString(), data.id)
-                            intent.putExtra(DetailActivity.DETAIL_TYPE, "Movie")
-                            itemView.context.startActivity(intent)
-                        }
                     }
                 }
                 is TvShow -> {
@@ -68,17 +60,15 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
                             .load(data.imageBaseUrl + data.backdrop_path)
                             .centerCrop()
                             .into(ivItemImage)
-
-                        itemView.setOnClickListener {
-                            val intent = Intent(itemView.context, DetailActivity::class.java)
-                            intent.putExtra(DetailActivity.EXTRA_ID.toString(), data.id)
-                            intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
-                            itemView.context.startActivity(intent)
-                        }
                     }
                 }
             }
 
+        }
+        init {
+            binding.root.setOnClickListener{
+                onItemClick?.invoke(listData[adapterPosition])
+            }
         }
     }
 }
