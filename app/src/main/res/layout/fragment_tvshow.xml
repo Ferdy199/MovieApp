@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="TV SHOW NOT FOUND"
+        android:text="@string/tv_not_found"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/rv_tvshow"
         app:layout_constraintEnd_toEndOf="parent"
