@@ -35,6 +35,4 @@ data class MovieEntity(
 
     @ColumnInfo(name = "movie_favorite")
     var favorite: Boolean
-) : Parcelable {
-    val imageBaseUrl get() = "https://image.tmdb.org/t/p/w500"
-}
+) : Parcelable

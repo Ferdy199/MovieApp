@@ -1,5 +1,7 @@
 package com.dicoding.movieapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -8,7 +10,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.dicoding.movieapp.databinding.ActivityMainBinding
-import com.dicoding.movieapp.ui.favorite.FavoriteFragment
 import com.dicoding.movieapp.ui.movies.MoviesFragment
 import com.dicoding.movieapp.ui.tvShow.TvShowFragment
 import com.google.android.material.navigation.NavigationView
@@ -60,7 +61,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 title = getString(R.string.menu_tv_show)
             }
             R.id.nav_favorite -> {
-                fragment = FavoriteFragment()
+                val uri = Uri.parse("movieapp://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
                 title = getString(R.string.menu_favorite)
             }
         }

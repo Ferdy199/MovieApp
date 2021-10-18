@@ -1,19 +1,18 @@
-package com.dicoding.movieapp.core.adapter
+package com.dicoding.movieapp.favorite.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteFragment
-import com.dicoding.movieapp.ui.favorite.tvfav.TvFavorite
+import com.dicoding.movieapp.favorite.moviefav.MovieFavFragment
+import com.dicoding.movieapp.favorite.tvfav.TvShowFavFragment
 
-class SectionsPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fm, lifecycle) {
+class SectionsPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> MovieFavoriteFragment()
-            1 -> TvFavorite()
+            0 -> MovieFavFragment()
+            1 -> TvShowFavFragment()
             else -> Fragment()
         }
     }

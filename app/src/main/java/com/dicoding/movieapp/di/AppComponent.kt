@@ -2,8 +2,6 @@ package com.dicoding.movieapp.di
 
 import com.dicoding.movieapp.core.core_di.CoreComponent
 import com.dicoding.movieapp.ui.detail.DetailActivity
-import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteFragment
-import com.dicoding.movieapp.ui.favorite.tvfav.TvFavorite
 import com.dicoding.movieapp.ui.movies.MoviesFragment
 import com.dicoding.movieapp.ui.tvShow.TvShowFragment
 import dagger.Component
@@ -21,7 +19,6 @@ interface AppComponent {
 
     fun inject(fragment: MoviesFragment)
     fun inject(fragment: TvShowFragment)
-    fun inject(fragment: MovieFavoriteFragment)
-    fun inject(fragment: TvFavorite)
     fun inject(fragment: DetailActivity)
+
 }

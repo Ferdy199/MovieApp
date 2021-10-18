@@ -1,4 +1,4 @@
-package com.dicoding.movieapp.ui.favorite.moviefav
+package com.dicoding.movieapp.favorite.moviefav
 
 import android.content.Context
 import android.content.Intent
@@ -9,38 +9,47 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.movieapp.MyApplication
 import com.dicoding.movieapp.core.adapter.MovieAdapter
+import com.dicoding.movieapp.core.core_di.CoreComponent
+import com.dicoding.movieapp.core.core_di.DaggerCoreComponent
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.utils.ViewModelFactory
-import com.dicoding.movieapp.databinding.MovieFavoriteFragmentBinding
+import com.dicoding.movieapp.favorite.databinding.MovieFavFragmentBinding
+import com.dicoding.movieapp.favorite.di.DaggerFavComponent
+import com.dicoding.movieapp.favorite.di.FavComponent
 import com.dicoding.movieapp.ui.detail.DetailActivity
 import javax.inject.Inject
 
-class MovieFavoriteFragment : Fragment() {
+class MovieFavFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelFactory
 
-    private val viewModel: MovieFavoriteViewModel by viewModels {
+    private val viewModel: MovieFavViewModel by viewModels {
         factory
     }
 
-    private var _binding: MovieFavoriteFragmentBinding? = null
-
+    private var _binding : MovieFavFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = MovieFavoriteFragmentBinding.inflate(inflater, container, false)
+        _binding = MovieFavFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
+         val coreComponent : CoreComponent by lazy {
+            DaggerCoreComponent.factory().create(context)
+        }
+
+        val favComponent: FavComponent by lazy {
+            DaggerFavComponent.factory().create(coreComponent)
+        }
+        favComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,5 +82,4 @@ class MovieFavoriteFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

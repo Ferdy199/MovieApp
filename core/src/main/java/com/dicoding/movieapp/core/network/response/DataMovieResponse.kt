@@ -23,6 +23,4 @@ data class DataMovieResponse(
 
     @field:SerializedName("vote_average")
     val vote_average: Float
-) {
-    val imageBaseUrl get() = "https://image.tmdb.org/t/p/w500"
-}
+)

@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.movieapp.core.utils.ViewModelFactory
 import com.dicoding.movieapp.ui.detail.DetailViewModel
-import com.dicoding.movieapp.ui.favorite.moviefav.MovieFavoriteViewModel
-import com.dicoding.movieapp.ui.favorite.tvfav.TvFavoriteViewModel
 import com.dicoding.movieapp.ui.movies.MoviesViewModel
 import com.dicoding.movieapp.ui.tvShow.TvShowViewModel
 import dagger.Binds
@@ -24,16 +22,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TvShowViewModel::class)
     abstract fun bindTvShowViewModel(viewModel: TvShowViewModel) : ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MovieFavoriteViewModel::class)
-    abstract fun bindMovieFavoriteViewModel(viewModel: MovieFavoriteViewModel) : ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(TvFavoriteViewModel::class)
-    abstract fun bindTvShowFavoriteViewModel(viewModel: TvFavoriteViewModel) : ViewModel
 
     @Binds
     @IntoMap
