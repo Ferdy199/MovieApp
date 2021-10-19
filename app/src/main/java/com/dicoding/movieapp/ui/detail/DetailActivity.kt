@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.dicoding.movieapp.MyApplication
 import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.domain.model.Movie
@@ -85,12 +87,16 @@ class DetailActivity : AppCompatActivity() {
 
             Glide.with(this@DetailActivity)
                 .load(movieDetail.data?.imageBaseUrl + movieDetail.data?.backdrop_path)
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_broken_image))
                 .centerCrop()
+                .error(R.drawable.ic_error)
                 .into(detailPosterImg)
 
             Glide.with(this@DetailActivity)
-                .load(movieDetail.data?.imageBaseUrl + movieDetail.data?.poster_path)
+                .load(movieDetail.data?.imageBaseUrl + movieDetail.data?.poster_path).transform(RoundedCorners(15))
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                 .centerCrop()
+                .error(R.drawable.ic_error)
                 .into(detailImg)
         }
     }
