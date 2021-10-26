@@ -17,4 +17,5 @@
     <string name="movies_not_found">Movies Not Found</string>
     <string name="movflix">MovFlix</string>
     <string name="image_banner">image banner</string>
+    <string name="image_splash">image splash</string>
 </resources>

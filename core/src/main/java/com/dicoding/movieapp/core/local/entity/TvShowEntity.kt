@@ -1,13 +1,11 @@
 package com.dicoding.movieapp.core.local.entity
 
-import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 @Entity(tableName = "tvShow")
 data class TvShowEntity(
     @PrimaryKey
@@ -35,4 +33,4 @@ data class TvShowEntity(
 
     @ColumnInfo(name = "tvShow_favorite")
     var favorite: Boolean
-) : Parcelable
+)

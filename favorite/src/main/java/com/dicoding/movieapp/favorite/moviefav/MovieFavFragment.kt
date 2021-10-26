@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.core_di.CoreComponent
 import com.dicoding.movieapp.core.core_di.DaggerCoreComponent
@@ -30,14 +31,14 @@ class MovieFavFragment : Fragment() {
     }
 
     private var _binding : MovieFavFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = MovieFavFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onAttach(context: Context) {
@@ -62,17 +63,18 @@ class MovieFavFragment : Fragment() {
                 startActivity(intent)
             }
             viewModel.getMovieFavorite().observe(viewLifecycleOwner, {
-                if (it !== null) {
+                if (it.isNotEmpty()) {
                     movieAdapter.setData(it)
                 } else {
-                    binding.mvTxt.text = "No Movies Found"
+                    binding?.mvTxt?.visibility = View.VISIBLE
+                    binding?.mvTxt?.text = getString(R.string.movies_not_found)
                 }
             })
 
-            with(binding.rvMoviesFav) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = movieAdapter
+            with(binding?.rvMoviesFav) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = movieAdapter
             }
         }
         super.onViewCreated(view, savedInstanceState)

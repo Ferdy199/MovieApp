@@ -32,7 +32,7 @@ class MoviesFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +40,7 @@ class MoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onAttach(context: Context) {
@@ -70,7 +70,7 @@ class MoviesFragment : Fragment() {
                             showLoading(false)
                         }
                         is Resource.Error -> {
-                            binding.mvTxt.visibility = View.VISIBLE
+                            binding?.mvTxt?.visibility = View.VISIBLE
                             showLoading(false)
                         }
                     }
@@ -78,10 +78,10 @@ class MoviesFragment : Fragment() {
                 Log.d("ISI DATA", it.toString())
             })
 
-            with(binding.rvMovies) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = movieAdapter
+            with(binding?.rvMovies) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = movieAdapter
             }
         }
     }
@@ -89,10 +89,10 @@ class MoviesFragment : Fragment() {
     private fun showLoading(loading: Boolean) {
         when (loading) {
             true -> {
-                binding.loadingBar.visibility = View.VISIBLE
+                binding?.loadingBar?.visibility = View.VISIBLE
             }
             false -> {
-                binding.loadingBar.visibility = View.GONE
+                binding?.loadingBar?.visibility = View.GONE
             }
         }
     }

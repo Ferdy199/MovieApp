@@ -13,6 +13,7 @@ android {
 
     defaultConfig {
         buildConfigField("String", "TMDB_TOKEN", '"bb5d7f0f79da40afb76493fbce22785e"')
+        buildConfigField("String", "URL_BASE", '"https://api.themoviedb.org/"')
         minSdk 21
         targetSdk 30
         versionCode 1
@@ -57,8 +58,5 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2-native-mt'
 
-    //by viewModels di Activity dan Fragment
-//    implementation "androidx.activity:activity-ktx:$activity_ktx_version"
-//    implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     api "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_ktx_version"
 }

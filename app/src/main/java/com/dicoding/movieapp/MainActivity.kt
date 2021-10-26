@@ -8,7 +8,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.ui.AppBarConfiguration
 import com.dicoding.movieapp.databinding.ActivityMainBinding
 import com.dicoding.movieapp.ui.movies.MoviesFragment
 import com.dicoding.movieapp.ui.tvShow.TvShowFragment

@@ -1,5 +1,6 @@
 package com.dicoding.movieapp.core.core_di
 
+import com.dicoding.movieapp.core.BuildConfig
 import com.dicoding.movieapp.core.network.config.ApiService
 import dagger.Module
 import dagger.Provides
@@ -23,7 +24,7 @@ class NetworkModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl(BuildConfig.URL_BASE)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
