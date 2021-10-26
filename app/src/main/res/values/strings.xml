@@ -2,26 +2,19 @@
     <string name="app_name">MovieApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Ferdy Rahmaesa Suarial</string>
-    <string name="nav_header_subtitle">Android Developer</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="menu_movies">Movies</string>
     <string name="menu_tv_show">Tv Show</string>
     <string name="menu_favorite">Favorite</string>
     <string name="movies_name">Movies Name</string>
     <string name="released_year">Released Year</string>
     <string name="rating">Rating</string>
-    <string name="genre">Genre</string>
     <string name="synopsis">Synopsis</string>
     <string name="description">Description</string>
     <string name="desc_gambar_poster">Gambar Poster</string>
     <string name="tombol_favorite">Tombol Favorite</string>
     <string name="tv_not_found">Tv Show Not Found</string>
-    <string name="movies_fav">Movies Favorite</string>
-    <string name="tv_fav">Tv Show Favorite</string>
     <string name="title_favorite">Favorite</string>
     <string name="movies_not_found">Movies Not Found</string>
     <string name="movflix">MovFlix</string>
-    <string name="mrating"> /10</string>
+    <string name="image_banner">image banner</string>
 </resources>
