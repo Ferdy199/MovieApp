@@ -14,6 +14,8 @@ android {
     defaultConfig {
         buildConfigField("String", "TMDB_TOKEN", '"bb5d7f0f79da40afb76493fbce22785e"')
         buildConfigField("String", "URL_BASE", '"https://api.themoviedb.org/"')
+        buildConfigField("String", "PASSPHRASE", '"dicoding"')
+        buildConfigField("String", "DATABASE_NAME", '"Movies.db"')
         minSdk 21
         targetSdk 30
         versionCode 1
@@ -38,7 +40,7 @@ android {
     }
 
     buildFeatures{
-        viewBinding = true
+        viewBinding true
     }
 }
 
