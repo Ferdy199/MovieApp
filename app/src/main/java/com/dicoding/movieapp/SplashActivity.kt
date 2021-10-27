@@ -6,20 +6,21 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.dicoding.movieapp.databinding.ActivitySplashBinding
 import com.bumptech.glide.request.RequestOptions
-
-
+import com.dicoding.movieapp.databinding.ActivitySplashBinding
 
 
 class SplashActivity : AppCompatActivity() {
-    lateinit var handler: Handler
+    private lateinit var handler: Handler
     private lateinit var binding : ActivitySplashBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.decorView.setBackgroundColor(resources.getColor(R.color.dark_green))
 
         Glide.with(this).load(R.drawable.mvlx_logofix).apply(RequestOptions().override(600, 400)).centerCrop().into(binding.splashImg)
         supportActionBar?.hide()

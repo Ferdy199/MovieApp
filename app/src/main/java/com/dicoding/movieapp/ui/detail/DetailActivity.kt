@@ -1,5 +1,6 @@
 package com.dicoding.movieapp.ui.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -57,13 +58,14 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDetailMovie(movieDetail: Resource<Movie>) {
         var statusFavorite = movieDetail.data?.favorite
         with(binding) {
             detailPosterTxt.text = movieDetail.data?.original_title
             detailMoviesName.text = movieDetail.data?.original_title
             detailReleasedYear.text = movieDetail.data?.release_date
-            detailRating.text = movieDetail.data?.vote_average.toString() + " /10"
+            detailRating.text = movieDetail.data?.vote_average.toString() + getString(R.string.per_nilai)
             detailDescription.text = movieDetail.data?.overview
 
             setFavorite(statusFavorite)
@@ -101,13 +103,14 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDetailTvSHow(tvShowDetail: Resource<TvShow>) {
         var statusFavorite = tvShowDetail.data?.favorite
         with(binding) {
             detailPosterTxt.text = tvShowDetail.data?.original_name
             detailMoviesName.text = tvShowDetail.data?.original_name
             detailReleasedYear.text = tvShowDetail.data?.first_air_date
-            detailRating.text = tvShowDetail.data?.vote_average.toString() + " /10"
+            detailRating.text = tvShowDetail.data?.vote_average.toString() + getString(R.string.per_nilai)
             detailDescription.text = tvShowDetail.data?.overview
 
             setFavorite(statusFavorite)

@@ -59,7 +59,7 @@ class TvShowFavFragment : Fragment() {
             movieAdapter.onItemClick = {
                 val intent = Intent(activity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
-                intent.putExtra(DetailActivity.DETAIL_TYPE, "Movie")
+                intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
                 startActivity(intent)
             }
             viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {

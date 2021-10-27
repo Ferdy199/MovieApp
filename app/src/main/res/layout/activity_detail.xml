@@ -90,7 +90,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:drawablePadding="8dp"
             android:gravity="start"
             android:text="@string/rating"
             android:textAllCaps="true"
@@ -98,6 +97,7 @@
             android:textStyle="bold"
             android:fontFamily="@font/muli"
             app:drawableStartCompat="@drawable/ic_star_yellow"
+            android:drawablePadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_Img"
             app:layout_constraintTop_toBottomOf="@+id/detail_releasedYear" />

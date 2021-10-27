@@ -15,7 +15,7 @@
     <string name="tv_not_found">Tv Show Not Found</string>
     <string name="title_favorite">Favorite</string>
     <string name="movies_not_found">Movies Not Found</string>
-    <string name="movflix">MovFlix</string>
     <string name="image_banner">image banner</string>
     <string name="image_splash">image splash</string>
+    <string name="per_nilai">\ /10\</string>
 </resources>

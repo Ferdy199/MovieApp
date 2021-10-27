@@ -1,5 +1,6 @@
 package com.dicoding.movieapp.core.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
     private var listData = ArrayList<RequestType>()
     var onItemClick : ((RequestType) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newListData: List<RequestType>?) {
         if (newListData == null) return
         listData.clear()

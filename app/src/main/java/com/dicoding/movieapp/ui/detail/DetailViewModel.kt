@@ -8,7 +8,7 @@ import com.dicoding.movieapp.core.utils.Resource
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(private val movieUseCase: MovieUseCase) : ViewModel() {
-    var movieId = MutableLiveData<Int>()
+    private var movieId = MutableLiveData<Int>()
 
     fun setMovieId(movie_id: Int) {
         this.movieId.value = movie_id
