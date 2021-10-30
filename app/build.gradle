@@ -1,4 +1,5 @@
 plugins {
+
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
@@ -23,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
