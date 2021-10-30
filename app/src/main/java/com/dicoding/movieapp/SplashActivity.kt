@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        window.decorView.setBackgroundColor(resources.getColor(R.color.dark_green))
+        window.decorView.setBackgroundColor(resources.getColor(R.color.dark_blue))
 
         Glide.with(this).load(R.drawable.mvlx_logofix).apply(RequestOptions().override(600, 400)).centerCrop().into(binding.splashImg)
         supportActionBar?.hide()

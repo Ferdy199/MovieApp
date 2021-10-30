@@ -39,6 +39,8 @@ class MovieFavFragment : Fragment() {
     ): View? {
         _binding = MovieFavFragmentBinding.inflate(inflater, container, false)
         return binding?.root
+
+
     }
 
     override fun onAttach(context: Context) {
@@ -55,6 +57,7 @@ class MovieFavFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
+            loadingBar(true)
             val movieAdapter = MovieAdapter<Movie>()
             movieAdapter.onItemClick = {
                 val intent = Intent(activity, DetailActivity::class.java)
@@ -65,9 +68,11 @@ class MovieFavFragment : Fragment() {
             viewModel.getMovieFavorite().observe(viewLifecycleOwner, {
                 if (it.isNotEmpty()) {
                     movieAdapter.setData(it)
+                    loadingBar(false)
+                    emptyData(false)
                 } else {
-                    binding?.mvTxt?.visibility = View.VISIBLE
-                    binding?.mvTxt?.text = getString(R.string.movies_not_found)
+                    loadingBar(false)
+                    emptyData(true)
                 }
             })
 
@@ -83,5 +88,30 @@ class MovieFavFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun emptyData(state : Boolean){
+        when(state){
+            true -> {
+                binding?.mvTxt?.visibility = View.VISIBLE
+                binding?.lottieMovfav?.visibility = View.VISIBLE
+                binding?.mvTxt?.text = getString(R.string.movies_not_found)
+            }
+            false -> {
+                binding?.mvTxt?.visibility = View.GONE
+                binding?.lottieMovfav?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun loadingBar(state: Boolean){
+        when(state){
+            true ->{
+                binding?.loadingBar?.visibility = View.VISIBLE
+            }
+            false ->{
+                binding?.loadingBar?.visibility = View.GONE
+            }
+        }
     }
 }

@@ -25,6 +25,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rv_moviesFav" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_Tvfav"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/mv_txt"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/mv_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="emptybox.json"
+        app:lottie_loop="true" />
+
     <ProgressBar
         android:id="@+id/loading_bar"
         android:layout_width="wrap_content"

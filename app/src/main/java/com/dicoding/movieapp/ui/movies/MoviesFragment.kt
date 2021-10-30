@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.movieapp.MyApplication
+import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.Movie
 import com.dicoding.movieapp.core.utils.Resource
@@ -64,13 +65,16 @@ class MoviesFragment : Fragment() {
             moviesViewModel.getAllMovies.observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it) {
-                        is Resource.Loading -> showLoading(true)
+                        is Resource.Loading ->{
+                            showLoading(true)
+                        }
                         is Resource.Success -> {
                             movieAdapter.setData(it.data)
                             showLoading(false)
+                            emptyData(false)
                         }
                         is Resource.Error -> {
-                            binding?.mvTxt?.visibility = View.VISIBLE
+                            emptyData(true)
                             showLoading(false)
                         }
                     }
@@ -93,6 +97,20 @@ class MoviesFragment : Fragment() {
             }
             false -> {
                 binding?.loadingBar?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun emptyData(state : Boolean){
+        when(state){
+            true -> {
+                binding?.mvTxt?.visibility = View.VISIBLE
+                binding?.lottieMovfav?.visibility = View.VISIBLE
+                binding?.mvTxt?.text = getString(R.string.movies_not_found)
+            }
+            false -> {
+                binding?.mvTxt?.visibility = View.GONE
+                binding?.lottieMovfav?.visibility = View.GONE
             }
         }
     }

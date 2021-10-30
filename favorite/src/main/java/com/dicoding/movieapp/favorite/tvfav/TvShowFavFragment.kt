@@ -55,6 +55,7 @@ class TvShowFavFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activity != null) {
+            loadingBar(true)
             val movieAdapter = MovieAdapter<TvShow>()
             movieAdapter.onItemClick = {
                 val intent = Intent(activity, DetailActivity::class.java)
@@ -64,10 +65,12 @@ class TvShowFavFragment : Fragment() {
             }
             viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
                 if (it.isNotEmpty()) {
+                    loadingBar(false)
                     movieAdapter.setData(it)
+                    emptyData(false)
                 } else {
-                    binding?.mvTxt?.visibility = View.VISIBLE
-                    binding?.mvTxt?.text = getString(R.string.tv_not_found)
+                   emptyData(true)
+                    loadingBar(false)
                 }
             })
 
@@ -83,6 +86,31 @@ class TvShowFavFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun emptyData(state : Boolean){
+        when(state){
+            true -> {
+                binding?.mvTxt?.visibility = View.VISIBLE
+                binding?.lottieTvfav?.visibility = View.VISIBLE
+                binding?.mvTxt?.text = getString(R.string.tv_not_found)
+            }
+            false -> {
+                binding?.mvTxt?.visibility = View.GONE
+                binding?.lottieTvfav?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun loadingBar(state: Boolean){
+        when(state){
+            true ->{
+                binding?.loadingBar?.visibility = View.VISIBLE
+            }
+            false ->{
+                binding?.loadingBar?.visibility = View.GONE
+            }
+        }
     }
 
 }

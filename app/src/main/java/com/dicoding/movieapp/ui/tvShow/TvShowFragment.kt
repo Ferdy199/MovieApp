@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.movieapp.MyApplication
+import com.dicoding.movieapp.R
 import com.dicoding.movieapp.core.adapter.MovieAdapter
 import com.dicoding.movieapp.core.domain.model.TvShow
 import com.dicoding.movieapp.core.utils.Resource
@@ -65,12 +66,13 @@ class TvShowFragment : Fragment() {
                         is Resource.Success -> {
                             tvShowAdapter.setData(it.data)
                             showLoading(false)
+                            emptyData(false)
                         }
                         is Resource.Loading -> {
                             showLoading(true)
                         }
                         is Resource.Error -> {
-                            binding?.tvTxt?.visibility = View.VISIBLE
+                            emptyData(true)
                             showLoading(false)
                         }
                     }
@@ -93,6 +95,20 @@ class TvShowFragment : Fragment() {
             }
             false -> {
                 binding?.loadingBar?.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun emptyData(state : Boolean){
+        when(state){
+            true -> {
+                binding?.tvTxt?.visibility = View.VISIBLE
+                binding?.lottieTvfav?.visibility = View.VISIBLE
+                binding?.tvTxt?.text = getString(R.string.tv_not_found)
+            }
+            false -> {
+                binding?.tvTxt?.visibility = View.GONE
+                binding?.lottieTvfav?.visibility = View.GONE
             }
         }
     }

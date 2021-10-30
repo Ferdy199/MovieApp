@@ -17,6 +17,13 @@
         <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/drawable/ic_menu_favorite.xml" value="0.240625" />
         <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/layout/activity_detail.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 1/Room/MovieApp/app/src/main/res/layout/fragment_favorite.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/app/src/main/res/layout/fragment_movies.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/app/src/main/res/layout/fragment_tvshow.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/core/src/main/res/layout/item_list_movie.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/core/src/main/res/layout/item_list_placeholder.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/favorite/src/main/res/layout/movie_fav_fragment.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidStudioProjects/Modul_Expert/Sub Mission/Submission 2/MovieApp/favorite/src/main/res/layout/tv_show_fav_fragment.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/drawable/ic_error.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
