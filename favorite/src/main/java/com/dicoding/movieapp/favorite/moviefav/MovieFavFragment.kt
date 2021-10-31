@@ -19,6 +19,7 @@ import com.dicoding.movieapp.favorite.databinding.MovieFavFragmentBinding
 import com.dicoding.movieapp.favorite.di.DaggerFavComponent
 import com.dicoding.movieapp.favorite.di.FavComponent
 import com.dicoding.movieapp.ui.detail.DetailActivity
+import kotlinx.android.synthetic.main.movie_fav_fragment.*
 import javax.inject.Inject
 
 class MovieFavFragment : Fragment() {
@@ -56,37 +57,17 @@ class MovieFavFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             loadingBar(true)
-            val movieAdapter = MovieAdapter<Movie>()
-            movieAdapter.onItemClick = {
-                val intent = Intent(activity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
-                intent.putExtra(DetailActivity.DETAIL_TYPE, "Movie")
-                startActivity(intent)
-            }
-            viewModel.getMovieFavorite().observe(viewLifecycleOwner, {
-                if (it.isNotEmpty()) {
-                    movieAdapter.setData(it)
-                    loadingBar(false)
-                    emptyData(false)
-                } else {
-                    loadingBar(false)
-                    emptyData(true)
-                }
-            })
-
-            with(binding?.rvMoviesFav) {
-                this?.layoutManager = LinearLayoutManager(context)
-                this?.setHasFixedSize(true)
-                this?.adapter = movieAdapter
-            }
+            showData()
+            refresh()
         }
-        super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -114,4 +95,38 @@ class MovieFavFragment : Fragment() {
             }
         }
     }
+
+    private fun refresh(){
+        swipeRefreshLayout.setOnRefreshListener {
+            showData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun showData(){
+        val movieAdapter = MovieAdapter<Movie>()
+        movieAdapter.onItemClick = {
+            val intent = Intent(activity, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
+            intent.putExtra(DetailActivity.DETAIL_TYPE, "Movie")
+            startActivity(intent)
+        }
+        viewModel.getMovieFavorite().observe(viewLifecycleOwner, {
+            movieAdapter.setData(it)
+            if (it.isNotEmpty()) {
+                loadingBar(false)
+                emptyData(false)
+            } else {
+                loadingBar(false)
+                emptyData(true)
+            }
+        })
+
+        with(binding?.rvMoviesFav) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.setHasFixedSize(true)
+            this?.adapter = movieAdapter
+        }
+    }
+
 }

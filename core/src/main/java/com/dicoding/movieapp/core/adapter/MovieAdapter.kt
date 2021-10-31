@@ -30,14 +30,13 @@ class MovieAdapter<RequestType> : RecyclerView.Adapter<MovieAdapter<RequestType>
         )
     }
 
+    override fun getItemCount(): Int {
+        return listData.size
+    }
+
     override fun onBindViewHolder(holder: MovieAdapter<RequestType>.ListViewHolder, position: Int) {
         val data = listData[position]
         holder.bind(data)
-
-    }
-
-    override fun getItemCount(): Int {
-        return listData.size
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

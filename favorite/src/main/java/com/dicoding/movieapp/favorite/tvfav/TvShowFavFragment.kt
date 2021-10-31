@@ -19,6 +19,7 @@ import com.dicoding.movieapp.favorite.databinding.TvShowFavFragmentBinding
 import com.dicoding.movieapp.favorite.di.DaggerFavComponent
 import com.dicoding.movieapp.favorite.di.FavComponent
 import com.dicoding.movieapp.ui.detail.DetailActivity
+import kotlinx.android.synthetic.main.movie_fav_fragment.*
 import javax.inject.Inject
 
 class TvShowFavFragment : Fragment() {
@@ -54,37 +55,17 @@ class TvShowFavFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             loadingBar(true)
-            val movieAdapter = MovieAdapter<TvShow>()
-            movieAdapter.onItemClick = {
-                val intent = Intent(activity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
-                intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
-                startActivity(intent)
-            }
-            viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
-                if (it.isNotEmpty()) {
-                    loadingBar(false)
-                    movieAdapter.setData(it)
-                    emptyData(false)
-                } else {
-                   emptyData(true)
-                    loadingBar(false)
-                }
-            })
-
-            with(binding?.rvMoviesFav) {
-                this?.layoutManager = LinearLayoutManager(context)
-                this?.setHasFixedSize(true)
-                this?.adapter = movieAdapter
-            }
+            showData()
+            refresh()
         }
-        super.onViewCreated(view, savedInstanceState)
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -102,6 +83,13 @@ class TvShowFavFragment : Fragment() {
         }
     }
 
+    private fun refresh(){
+        swipeRefreshLayout.setOnRefreshListener {
+            showData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
     private fun loadingBar(state: Boolean){
         when(state){
             true ->{
@@ -110,6 +98,32 @@ class TvShowFavFragment : Fragment() {
             false ->{
                 binding?.loadingBar?.visibility = View.GONE
             }
+        }
+    }
+
+    private fun showData(){
+        val movieAdapter = MovieAdapter<TvShow>()
+        movieAdapter.onItemClick = {
+            val intent = Intent(activity, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_ID.toString(), it.id)
+            intent.putExtra(DetailActivity.DETAIL_TYPE, "Tv_Show")
+            startActivity(intent)
+        }
+        viewModel.getTvShowFavorite().observe(viewLifecycleOwner, {
+            movieAdapter.setData(it)
+            if (it.isNotEmpty()) {
+                loadingBar(false)
+                emptyData(false)
+            } else {
+                emptyData(true)
+                loadingBar(false)
+            }
+        })
+
+        with(binding?.rvMoviesFav) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.setHasFixedSize(true)
+            this?.adapter = movieAdapter
         }
     }
 
